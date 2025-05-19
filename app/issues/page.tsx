@@ -1,3 +1,14 @@
+"use client";
+
+import { Button } from "@radix-ui/themes";
+import Link from "next/link";
+
 export default function IssuePage() {
-  return <div>Issue</div>;
+  return (
+    <div>
+      <Button>
+        <Link href='/issues/new'>New Issue</Link>
+      </Button>
+    </div>
+  );
 }
