@@ -1,7 +1,7 @@
 "use client"; // Exécution côté client (Next.js)
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Callout, Text, TextField } from "@radix-ui/themes";
+import { Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,7 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
 });
 import "easymde/dist/easymde.min.css";
 import ErrorMessage from "../../components/ErrorMessage";
+import Spinner from "../../components/Spinner";
 
 // Typage automatique à partir du schéma Zod
 type IssueForm = z.infer<typeof createIssueSchema>;
@@ -29,7 +30,7 @@ export default function NewIssuePage() {
     control,
     handleSubmit,
     getValues,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IssueForm>({
     resolver: zodResolver(createIssueSchema),
   });
@@ -68,7 +69,9 @@ export default function NewIssuePage() {
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
