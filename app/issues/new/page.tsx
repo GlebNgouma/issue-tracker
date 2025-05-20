@@ -1,31 +1,47 @@
-"use client";
+"use client"; // Exécution côté client (Next.js)
 
-import { Button, Callout, TextField } from "@radix-ui/themes";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Callout, Text, TextField } from "@radix-ui/themes";
 import axios from "axios";
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
-import "easymde/dist/easymde.min.css";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { createIssueSchema } from "../../validationSchema";
+import { z } from "zod";
 
-interface IssueForm {
-  title: string;
-  description: string;
-}
+// Chargement dynamique de l'éditeur Markdown (pas côté serveur)
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
+import "easymde/dist/easymde.min.css";
+import ErrorMessage from "../../components/ErrorMessage";
+
+// Typage automatique à partir du schéma Zod
+type IssueForm = z.infer<typeof createIssueSchema>;
 
 export default function NewIssuePage() {
   const router = useRouter();
-  const { register, control, handleSubmit, getValues } = useForm<IssueForm>();
+
+  // Initialisation du formulaire avec validation Zod
+  const {
+    register,
+    control,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<IssueForm>({
+    resolver: zodResolver(createIssueSchema),
+  });
+
   const [error, setError] = useState("");
 
+  // Fonction appelée à la soumission du formulaire
   const onHandleSubmit = async () => {
     const data = getValues();
     try {
-      await axios.post("/api/issues", data);
-      router.push("/issues");
+      await axios.post("/api/issues", data); // Envoie à l'API
+      router.push("/issues"); // Redirection
     } catch (error) {
       console.log(error);
       setError("Une erreur inattendue s'est produite.");
@@ -39,8 +55,11 @@ export default function NewIssuePage() {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
+
       <form className='space-y-3' onSubmit={handleSubmit(onHandleSubmit)}>
         <TextField.Root placeholder='Title' {...register("title")} />
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
+        {/* Description gérée avec Controller car SimpleMDE est un composant contrôlé */}
         <Controller
           name='description'
           control={control}
@@ -48,6 +67,7 @@ export default function NewIssuePage() {
             <SimpleMDE placeholder='Description' {...field} />
           )}
         />
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button>Submit New Issue</Button>
       </form>
     </div>
