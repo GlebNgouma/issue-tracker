@@ -1,4 +1,3 @@
-import { Link as RadixLink } from "@radix-ui/themes";
 import NextLink from "next/link";
 
 interface Props {
@@ -8,8 +7,8 @@ interface Props {
 
 export default function Link({ href, children }: Props) {
   return (
-    <NextLink href={href} passHref legacyBehavior>
-      <RadixLink>{children}</RadixLink>
+    <NextLink href={href} className='hover:underline'>
+      {children}
     </NextLink>
   );
 }

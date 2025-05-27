@@ -1,5 +1,3 @@
-"use client";
-
 import { Status } from "@prisma/client";
 import { Badge } from "@radix-ui/themes";
 
