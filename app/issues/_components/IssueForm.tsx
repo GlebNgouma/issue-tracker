@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { createIssueSchema } from "../../validationSchema";
+import { issueSchema } from "../../validationSchema";
 import { z } from "zod";
 
 // Chargement dynamique de l'éditeur Markdown (pas côté serveur)
@@ -21,7 +21,7 @@ import Spinner from "../../components/Spinner";
 import { Issue } from "@prisma/client";
 
 // Typage automatique à partir du schéma Zod
-type IssueFormData = z.infer<typeof createIssueSchema>;
+type IssueFormData = z.infer<typeof issueSchema>;
 
 export default function IssueForm({ issue }: { issue?: Issue }) {
   const router = useRouter();
@@ -34,7 +34,7 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
     getValues,
     formState: { errors, isSubmitting },
   } = useForm<IssueFormData>({
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(issueSchema),
   });
 
   const [error, setError] = useState("");
