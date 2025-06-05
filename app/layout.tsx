@@ -1,7 +1,7 @@
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Theme } from "@radix-ui/themes";
+import { Container, Theme } from "@radix-ui/themes";
 import NavBar from "./NavBar";
 
 export const metadata: Metadata = {
@@ -17,11 +17,13 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <Theme accentColor='purple'>
-          <NavBar />
-          <main className='p-5'>{children}</main>
-          {/* <ThemePanel /> */}
-        </Theme>
+        <Container maxWidth={{ md: "80vw" }}>
+          <Theme accentColor='purple'>
+            <NavBar />
+            <main className='p-5'>{children}</main>
+            {/* <ThemePanel /> */}
+          </Theme>
+        </Container>
       </body>
     </html>
   );
