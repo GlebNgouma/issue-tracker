@@ -44,3 +44,6 @@ export default async function IssuePage() {
     </div>
   );
 }
+
+//Desactive le rendu static
+export const dynamic = "force-dynamic";
