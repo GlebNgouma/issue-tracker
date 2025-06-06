@@ -83,8 +83,7 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
-          {issue ? "Update Issue" : "Submit New Issue"}{" "}
-          {isSubmitting && <Spinner />}
+          {issue ? "Mise à jour" : "Soumettre"} {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>

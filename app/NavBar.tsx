@@ -10,8 +10,8 @@ export default function NavBar() {
   const currentPath = usePathname();
 
   const links = [
-    { label: "Dashbord", href: "/" },
-    { label: "Issues", href: "/issues/list" },
+    { label: "Tableau de bord", href: "/" },
+    { label: "Poblemes", href: "/issues/list" },
   ];
   return (
     <nav className='flex space-x-6 border-b mb-5 px-5 h-14 items-center'>

@@ -7,7 +7,7 @@ export default function NewIssueButton() {
   return (
     <div className='mb-5'>
       <Button>
-        <Link href='/issues/new'>New Issue</Link>
+        <Link href='/issues/new'>Enregistrer un poblème</Link>
       </Button>
     </div>
   );

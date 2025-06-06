@@ -48,7 +48,7 @@ export default function DeleteIssueButton({ issueId }: { issueId: number }) {
             </AlertDialog.Cancel>
             <AlertDialog.Action>
               <Button variant='solid' color='red' onClick={deleteIssue}>
-                Supprimer un problème
+                Supprimer
               </Button>
             </AlertDialog.Action>
           </Flex>
