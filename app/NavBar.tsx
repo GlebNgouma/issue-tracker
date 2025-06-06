@@ -11,7 +11,7 @@ export default function NavBar() {
 
   const links = [
     { label: "Dashbord", href: "/" },
-    { label: "Issues", href: "/issues" },
+    { label: "Issues", href: "/issues/list" },
   ];
   return (
     <nav className='flex space-x-6 border-b mb-5 px-5 h-14 items-center'>

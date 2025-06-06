@@ -49,7 +49,7 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
       } else {
         await axios.post("/api/issues", data); // Envoie à l'API
       }
-      router.push("/issues"); // Redirection
+      router.push("/issues/list"); // Redirection
       router.refresh();
     } catch (error) {
       console.log(error);
