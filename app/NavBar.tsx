@@ -5,14 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaBug } from "react-icons/fa";
 import { useSession } from "next-auth/react";
-import {
-  Avatar,
-  Box,
-  Button,
-  DropdownMenu,
-  Flex,
-  Text,
-} from "@radix-ui/themes";
+import { Avatar, Box, DropdownMenu, Flex, Text } from "@radix-ui/themes";
 
 export default function NavBar() {
   //Recupere le chemin actuel
