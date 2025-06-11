@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Container, Theme } from "@radix-ui/themes";
 import NavBar from "./NavBar";
+import AuthProvider from "./auth/Provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,13 +18,15 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body>
-        <Container maxWidth={{ md: "80vw" }}>
-          <Theme accentColor='purple'>
-            <NavBar />
-            <main className='p-5'>{children}</main>
-            {/* <ThemePanel /> */}
-          </Theme>
-        </Container>
+        <AuthProvider>
+          <Container maxWidth={{ md: "80vw" }}>
+            <Theme accentColor='purple'>
+              <NavBar />
+              <main className='p-5'>{children}</main>
+              {/* <ThemePanel /> */}
+            </Theme>
+          </Container>
+        </AuthProvider>
       </body>
     </html>
   );
