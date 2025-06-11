@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <body>
+    <html lang='en' suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true}>
         <AuthProvider>
           <Container maxWidth={{ md: "80vw" }}>
             <Theme accentColor='purple'>
