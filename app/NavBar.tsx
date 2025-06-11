@@ -18,7 +18,7 @@ export default function NavBar() {
       <Link href='/'>
         <FaBug />
       </Link>
-      <ul className='flex space-x-6'>
+      <ul className='flex space-x-10'>
         {links.map((link) => (
           <Link
             key={link.href}
