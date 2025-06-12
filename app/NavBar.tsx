@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { FaBug } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { Avatar, Box, DropdownMenu, Flex, Text } from "@radix-ui/themes";
+import Skeleton from "@/app/components/Skeleton";
 
 export default function NavBar() {
   return (
@@ -54,7 +55,7 @@ const AuthStatus = () => {
   //permet d'acceder a la session en cours de user
   const { data: session, status } = useSession();
 
-  if (status === "loading") return null;
+  if (status === "loading") return <Skeleton />;
 
   if (status === "unauthenticated") {
     return (
