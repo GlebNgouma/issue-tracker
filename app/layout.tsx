@@ -1,9 +1,10 @@
-import "@radix-ui/themes/styles.css";
-import "./globals.css";
-import type { Metadata } from "next";
 import { Container, Theme } from "@radix-ui/themes";
-import NavBar from "./NavBar";
+import "@radix-ui/themes/styles.css";
+import type { Metadata } from "next";
 import AuthProvider from "./auth/Provider";
+import "./globals.css";
+import NavBar from "./NavBar";
+import QueryClientProvider from "./QueryClientProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,15 +19,17 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true}>
-        <AuthProvider>
-          <Container maxWidth={{ md: "80vw" }}>
-            <Theme accentColor='purple'>
-              <NavBar />
-              <main className='p-5'>{children}</main>
-              {/* <ThemePanel /> */}
-            </Theme>
-          </Container>
-        </AuthProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <Container maxWidth={{ md: "80vw" }}>
+              <Theme accentColor='purple'>
+                <NavBar />
+                <main className='p-5'>{children}</main>
+                {/* <ThemePanel /> */}
+              </Theme>
+            </Container>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
