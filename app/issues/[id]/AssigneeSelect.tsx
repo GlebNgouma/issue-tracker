@@ -22,20 +22,22 @@ export default function AssigneeSelect({ issue }: { issue: Issue }) {
 
   if (error) return null;
 
+  const assignIssue = async (userId: string) => {
+    try {
+      await axios.patch("/api/issues/" + issue.id, {
+        assignedToUserId: userId === "Unassigned" ? null : userId,
+      });
+      toast.success("Enregistrer avec success");
+    } catch {
+      toast.error("Les modifications n'ont pas pu etre enregistrées");
+    }
+  };
+
   return (
     <>
       <Select.Root
         defaultValue={issue.assignedToUserId || "Unassigned"}
-        onValueChange={async (userId) => {
-          try {
-            await axios.patch("/api/issues/" + issue.id, {
-              assignedToUserId: userId === "Unassigned" ? null : userId,
-            });
-            toast.success("Enregistrer avec success");
-          } catch {
-            toast.error("Les modifications n'ont pas pu etre enregistrées");
-          }
-        }}
+        onValueChange={assignIssue}
       >
         <Select.Trigger placeholder='Attribuer...' />
         <Select.Content>
