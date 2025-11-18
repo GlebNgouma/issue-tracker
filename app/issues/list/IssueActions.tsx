@@ -6,7 +6,7 @@ import IssueStatusFilter from "./IssueStatusFilter";
 
 export default function NewIssueButton() {
   return (
-    <Flex mb='5' justify='between'>
+    <Flex justify='between'>
       <IssueStatusFilter />
       <Button>
         <Link href='/issues/new'>Enregistrer un poblème</Link>
